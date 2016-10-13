@@ -25,6 +25,7 @@ GP2S is a differential expression algorithm for data collected across two condit
 For details, consult [the documentation][gp2s].
 
 To perform a GP2S analysis:
+
 1. Locate and open the GP2S app (under Time Series Expression Data / Differential Expression in the hierarchy, or just locate it using the search bar at the top of the apps window).
 2. Under General Input, provide the initial expression data (`ktpolanski/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
 3. Feel free to leave the other parameters as default. Press Launch.
@@ -47,6 +48,7 @@ This is not the correct method to use for the data at hand, but this section of 
 For details, consult [the documentation][gradienttool].
 
 To perform a gradient tool analysis:
+
 1. Filter down the dataset to just the treated data. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
 2. Under Input, provide the initial expression data (`ktpolanski/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
 3. Type in `Control` under Remove Condition. Press Launch.
@@ -69,6 +71,7 @@ In this step, we'll apply two different clustering methods to the differentially
 While the differential expression analysis made active use of the control information, clustering focuses on the behaviour of genes in the treated time course. As such, before we begin, we need to filter out the control data from the expression file.
 
 To filter out the control data:
+
 1. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
 2. Under Input, provide the differentially expressed gene expression data (`FilteredOutput.csv` created in the GP2S section of the tutorial) into the Expression CSV File field.
 3. Type in `Control` under Remove Condition. Press Launch.
@@ -80,6 +83,7 @@ BHC is a standard hierarchical clustering algorithm which starts off with all th
 For details, consult [the documentation][bhc].
 
 To perform a BHC analysis:
+
 1. Locate the BHC app (under Time Series Expression Data / Clustering/Biclustering in the hierarchy, or just locate it using the search bar at the top of the apps window).
 2. Under Input, provide the treated-only differentially expressed gene expression data (`FilteredOutput.csv` created in the subsection above) into the Expression CSV field.
 3. Select "Squared Exponential Covariance (Time Course)" from the Run Mode dropdown. Press Launch.
@@ -95,6 +99,7 @@ TCAP is a slightly different approach to BHC, as it uses a more complex distance
 For details, consult [the documentation][tcap].
 
 To perform a TCAP analysis:
+
 1. Locate the TCAP app (under Time Series Expression Data / Clustering/Biclustering in the hierarchy, or just locate it using the search bar at the top of the apps window).
 2. Under Input, provide the treated-only differentially expressed gene expression data (`FilteredOutput.csv` created in the subsection above) into the Expression CSV File field.
 3. Feel free to leave the other parameters as default. Press Launch.
@@ -114,6 +119,7 @@ In this step, we'll analyse the TCAP clusters we created with BiNGO, HMT and MEM
 Clusters with a single gene in them don't carry much relevant information when performing overrepresentation analyses, and are in fact actively disliked by some of the methods (MEME-LaB). As such, before we begin, we're going to remove all singleton clusters from our cluster list
 
 To filter out singleton clusters:
+
 1. Open the TCAP output folder you downloaded to your local machine.
 2. Go to the `functional_analysis_inputs` folder. `bingo.txt` features the clusters formatted in a BiNGO-friendly manner, while `meme.txt` features clusters formatted in a format HMT and MEME-LaB understand.
 3. Open up `bingo.txt` in a text editor. You'll notice that each cluster in the file starts with a line beginning with `>Cluster`, then has one line per gene ID in the cluster, then ends with the word `batch`. Locate all the clusters with a single gene and remove all their lines from the file.
@@ -125,6 +131,7 @@ To filter out singleton clusters:
 BiNGO is a Cytoscape plug-in that allows for the analysis of the overrepresentation of GO terms in specified gene groups. GO terms are a computationally friendly manner of capturing functionality that can be used to annotate genes with increasingly specific information on their role. GO terms form a tree, with the branching leading towards more and more specific regulatory functions. However, no matter how particular a single GO term may be, following the path back to the root gets all the terms from the passed banches as well. BiNGO traverses this landscape to identify the terms overrepresented in the supplied gene groups using simple statistical testing.
 
 To perform a BiNGO analysis:
+
 1. Set up Cytoscape on your machine. Go to http://www.cytoscape.org/download.php and download the recommended installer. Then install Cytoscape.
 2. Open Cytoscape.
 3. Set up BiNGO. Go to http://apps.cytoscape.org/apps/bingo and press the Install button. This will automatically set up the app within your Cytoscape environment.
@@ -142,6 +149,7 @@ HMT uses the same exact statistical framework as BiNGO to perform a different ki
 For details, consult [the documentation][hmt].
 
 To perform a HMT analysis:
+
 1. Locate the HMT app (under Enrichment Analysis / Transcription Factor Binding Sites in the hierarchy, or just locate it using the search bar at the top of the apps window).
 2. HMT typically requires a preliminary run of your motifs through its helper app HMT\_index, but this takes some time to process. Due to temporal constraints of the tutorial, this has been precomputed and made available for you. If you wish to take a look at the inputs for HMT\_ index or re-run it yourself at a later time, you can find the used inputs in `ktpolanski/hmt_index_testdata` under Community Data. All the parameters in the HMT\_index were left as defaults.
 3. Under Input, provide the MEME-formatted clusters generated by TCAP that you filtered singletons out of and re-uploaded to CyVerse in the Gene Group Input File field.
@@ -158,6 +166,7 @@ MEME-LaB is also a transcription factor binding tool, but one that performs its 
 For details, consult [the documentation][memelab].
 
 To perform a MEME-LaB analysis:
+
 1. Locate the MEME-LaB app (under Enrichment Analysis / Transcription Factor Binding Sites in the hierarchy, or just locate it using the search bar at the top of the apps window).
 2. Similarly to HMT, MEME-LaB operates on promoter sequences of genes in the organism we're working on. However, while HMT outsources promoter mining to its helper app HMT\_index, MEME-LaB performs it within its innards. As such, we need to provide a genome sequence and GFF3 file for the app to automatically extract promoters. You can find them in `ktpolanski/hmt_index_testdata` under Community Data, with `genome_rm.fa` going into the Genome FASTA File field and `annot.gff3` going into the GFF3 Annotation field.
 3. Provide the MEME-formatted clusters generated by TCAP that you filtered singletons out of and re-uploaded to CyVerse in the Gene Group Input File field. Press Launch.
@@ -175,6 +184,7 @@ The final part of the tutorial will see us infer a transcription factor regulato
 The network inference algorithm expects expression data for differentially expressed transcription factors. Unlike clustering, it doesn't mind having information from the control time series in the dataset though. As such, we'll leave the control time series in to provide additional information to the modelling algorithm.
 
 To filter the data to include differentially expressed transcription factors:
+
 1. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
 2. Under Input, provide the initial gene expression data (`ktpolanski/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
 3. Provide a list of Arabidopsis transcription factors (sourced from [Pruneda-Paz et al.][kay], `ktpolanski/expression_tutorial/tf_list.txt` under Community Data) in the Filter Gene List field. Press Launch.
@@ -186,6 +196,7 @@ Now that the data has been appropriately filtered, network inference can commenc
 For details, consult [the documentation][csi].
 
 To run CSI and analyse its results:
+
 1. Locate the CSI app (under Time Series Expression Data / Network Inference in the hierarchy, or just locate it using the search bar at the top of the apps window).
 2. Under Input, provide the differentially expressed transcription factor data we filtered out in the previous step (`FilteredOutput.csv`) into the Gene Expression CSV field.
 3. Leave all the parameters as defaults. Press Launch.

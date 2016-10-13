@@ -39,7 +39,7 @@ To perform a GP2S analysis:
 
 Once the expression filter analysis completes, you will have an expression file with just the differentially expressed genes in it. This is the file that will be used on input for analyses in subsequent stages of the workflow.
 
-### Gradient tool
+### Gradient Tool
 
 The gradient tool is a method for datasets that only feature a single condition. Some experimental setups make it impossible to have a control, with an example being measurements on the ageing of plant leaves ([Breeze et al., 2011][breeze2011]). In cases like those, the gradient tool observes the trends in the rate of change of expression across time, and pinpoints time points at which regulatory events begin.
 
@@ -66,7 +66,7 @@ Now that we have obtained a set of differentially expressed genes with GP2S, we 
 
 In this step, we'll apply two different clustering methods to the differentially expressed gene set we obtained in the last step. This will provide insight into what regulatory trends are captured in the data, with the two algorithms extracting different information from the data. At the end of the step, we'll have a small number of gene groups to perform data mining on.
 
-### Data preprocessing
+### Data Preprocessing
 
 While the differential expression analysis made active use of the control information, clustering focuses on the behaviour of genes in the treated time course. As such, before we begin, we need to filter out the control data from the expression file.
 

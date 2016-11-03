@@ -36,6 +36,7 @@ To perform a GP2S analysis:
 8. Under Input, provide the initial expression data (`ktpolanski/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
 9. Under Input, provide the `scores.txt` file produced by GP2S in the GP2S Scores field.
 10. Under Input, provide the score cutoff you settled on in the Score Threshold field. The default value of 5 is there just as a guideline. Press Launch.
+11. Once the analysis completes, go into the results folder and rename the created `FilteredOutput.csv` to a name of your choosing. This is needed so that further filtering of the data can be performed in later steps.
 
 Once the expression filter analysis completes, you will have an expression file with just the differentially expressed genes in it. This is the file that will be used on input for analyses in subsequent stages of the workflow.
 
@@ -73,7 +74,7 @@ While the differential expression analysis made active use of the control inform
 To filter out the control data:
 
 1. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the differentially expressed gene expression data (`FilteredOutput.csv` created in the GP2S section of the tutorial) into the Expression CSV File field.
+2. Under Input, provide the differentially expressed gene expression data (the renamed `FilteredOutput.csv` file created in the GP2S section of the tutorial) into the Expression CSV File field.
 3. Type in `Control` under Remove Condition. Press Launch.
 
 ### BHC
@@ -85,7 +86,7 @@ For details, consult [the documentation][bhc].
 To perform a BHC analysis:
 
 1. Locate the BHC app (under Time Series Expression Data / Clustering/Biclustering in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the treated-only differentially expressed gene expression data (`FilteredOutput.csv` created in the subsection above) into the Expression CSV field.
+2. Under Input, provide the treated-only differentially expressed gene expression data (`FilteredOutput.csv` created in the Data Preprocessing subsection) into the Expression CSV field.
 3. Select "Squared Exponential Covariance (Time Course)" from the Run Mode dropdown. Press Launch.
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 5. Take a look at the clustering heatmap (`heatmap.png`), which shows the established clustering hierarchy and captures the determined cutoff. If the lines of the dendrogram are solid, the clustering steps were deemed acceptable and stayed in the final output. If the lines are dashed, the algorithm determined that the clustering step is detrimental to the quality of the output and left it out. A number of the clusters are singletons (just one gene in them). Any idea why?
@@ -101,7 +102,7 @@ For details, consult [the documentation][tcap].
 To perform a TCAP analysis:
 
 1. Locate the TCAP app (under Time Series Expression Data / Clustering/Biclustering in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the treated-only differentially expressed gene expression data (`FilteredOutput.csv` created in the subsection above) into the Expression CSV File field.
+2. Under Input, provide the treated-only differentially expressed gene expression data (`FilteredOutput.csv` created in the Data Preprocessing subsection) into the Expression CSV File field.
 3. Feel free to leave the other parameters as default. Press Launch.
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 5. Take a look at the cluster plots in the plots folder. Do you see any regulatory interactions more complex than basic co-expression being captured by the modules? Do singleton clusters still occur? How does their rate compare to those produced by BHC? Any ideas for why this might be happening?
@@ -186,7 +187,7 @@ The network inference algorithm expects expression data for differentially expre
 To filter the data to include differentially expressed transcription factors:
 
 1. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the initial gene expression data (`ktpolanski/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
+2. Under Input, provide the differentially expressed gene expression data (the renamed `FilteredOutput.csv` file created in the GP2S section of the tutorial) into the Expression CSV File field.
 3. Provide a list of Arabidopsis transcription factors (sourced from [Pruneda-Paz et al.][kay], `ktpolanski/expression_tutorial/tf_list.txt` under Community Data) in the Filter Gene List field. Press Launch.
 
 ### CSI
@@ -221,6 +222,7 @@ With that, we have arrived at the end of the tutorial. We started out from raw e
 [bhc]: https://github.com/cyversewarwick/bhc
 [tcap]: https://github.com/cyversewarwick/tcap
 [hmt]: https://github.com/cyversewarwick/hmt
+[csi]: https://github.com/cyversewarwick/csi
 [memelab]: https://github.com/cyversewarwick/meme_lab
 [fz2014]: http://www.pnas.org/content/111/6/2367.short
 [weirauch2014]: http://www.cell.com/cell/abstract/S0092-8674(14)01036-8?_returnURL=http%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867414010368%3Fshowall%3Dtrue&cc=y=

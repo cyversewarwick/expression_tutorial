@@ -31,7 +31,7 @@ To perform a GP2S analysis:
 3. Feel free to leave the other parameters as default. Press Launch.
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 5. Go to the plots folder and take a look at the plots. The name of each individual plot file is the analysed gene, while the title line of the plot contains information on the Bayes Factor score assigned to it based on the models. The blue model is the one fit to all the data at once, while the red and green are two individual fits for each condition separately. The higher the score, the more confident the algorithm is the gene is differentially expressed. Around what score value do you start seeing visually discernible differential expression?
-6. Select a score cutoff for differential expression. The documentation recommends a value between 3 and 10. Combine this suggestion with the conclusions you drew from looking at the plots and pick a value.
+6. Select a score cutoff for differential expression. The documentation recommends a value between 3 and 10. Combine this suggestion with the conclusions you drew from looking at the plots and pick a value. The rest of the analysis has been tested with a cutoff of 5.
 7. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
 8. Under Input, provide the initial expression data (`ktpolanski/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
 9. Under Input, provide the `scores.txt` file produced by GP2S in the GP2S Scores field.

@@ -8,7 +8,7 @@ This page will offer a step by step guide of a basic analysis of time course exp
 
 For the purpose of the tutorial, we will use a small expression input file to make the individual analyses complete in a timely manner. The data at hand will be 250 randomly chosen genes from a 24 time point microarray time course documenting Arabidopsis response to *Botrytis cinerea* infection, along with a control experiment. The complete experiment analysis, along with the drawn conclusions, can be found in [Windram et al., 2012][windram2012]. Reading that article can serve as an example on how to identify and perform follow-up analyses building on the core of the workflow.
 
-The expression data can be found at `cyverseuk/expression_tutorial/data.csv` under Community Data.
+The expression data can be found at `iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data.
 
 The discussed workflow can also be performed for RNA-Seq data, but due to assumptions made by the algorithms the data has to be log-transformed to make its distribution closer to normal. This option is offered by the expression filter app mentioned later in the tutorial.
 
@@ -27,13 +27,13 @@ For details, consult [the documentation][gp2s].
 To perform a GP2S analysis:
 
 1. Locate and open the GP2S app (under Time Series Expression Data / Differential Expression in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under General Input, provide the initial expression data (`cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
+2. Under General Input, provide the initial expression data (`iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
 3. Feel free to leave the other parameters as default. Press Launch.
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 5. Go to the plots folder and take a look at the plots. The name of each individual plot file is the analysed gene, while the title line of the plot contains information on the Bayes Factor score assigned to it based on the models. The blue model is the one fit to all the data at once, while the red and green are two individual fits for each condition separately. The higher the score, the more confident the algorithm is the gene is differentially expressed. Around what score value do you start seeing visually discernible differential expression?
 6. Select a score cutoff for differential expression. The documentation recommends a value between 3 and 10. Combine this suggestion with the conclusions you drew from looking at the plots and pick a value. The rest of the analysis has been tested with a cutoff of 5.
 7. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
-8. Under Input, provide the initial expression data (`cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
+8. Under Input, provide the initial expression data (`iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
 9. Under Input, provide the `scores.txt` file produced by GP2S in the GP2S Scores field.
 10. Under Input, provide the score cutoff you settled on in the Score Threshold field. The default value of 5 is there just as a guideline. Press Launch.
 11. Once the analysis completes, go into the results folder and rename the created `FilteredOutput.csv` to a name of your choosing. This is needed so that further filtering of the data can be performed in later steps.
@@ -51,7 +51,7 @@ For details, consult [the documentation][gradienttool].
 To perform a gradient tool analysis:
 
 1. Filter down the dataset to just the treated data. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the initial expression data (`cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
+2. Under Input, provide the initial expression data (`iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
 3. Type in `Control` under Remove Condition. Press Launch.
 4. Locate and open the Gradient Tool app (under Time Series Expression Data / Differential expression in the hierarchy, or just locate it using the search bar at the top of the apps window).
 5. Under Input, provide the `FilteredOutput.csv` file created by the Expression Filtered app in step 1 under the Expression File field. Press Launch.
@@ -152,9 +152,9 @@ For details, consult [the documentation][hmt].
 To perform a HMT analysis:
 
 1. Locate the HMT app (under Enrichment Analysis / Transcription Factor Binding Sites in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. HMT typically requires a preliminary run of your motifs through its helper app HMT\_index, but this takes some time to process. Due to temporal constraints of the tutorial, this has been precomputed and made available for you. If you wish to take a look at the inputs for HMT\_ index or re-run it yourself at a later time, you can find the used inputs in `cyverseuk/hmt_index_testdata` under Community Data. All the parameters in the HMT\_index were left as defaults.
+2. HMT typically requires a preliminary run of your motifs through its helper app HMT\_index, but this takes some time to process. Due to temporal constraints of the tutorial, this has been precomputed and made available for you. If you wish to take a look at the inputs for HMT\_ index or re-run it yourself at a later time, you can find the used inputs in `iplantcollaborative/example_data/cyverseuk/hmt_index_testdata` under Community Data. All the parameters in the HMT\_index were left as defaults.
 3. Under Input, provide the MEME-formatted clusters generated by TCAP that you filtered singletons out of and re-uploaded to CyVerse in the Gene Group Input File field.
-4. For the Motif Hit File, Motif PWM Logos Folder and Gene Universe provide `fimo_found.txt`, the folder `logos` and `universe.txt` which can be found in `cyverseuk/hmt_testdata` under Community Data. These are the files created by the helper app HMT\_index. Press Launch.
+4. For the Motif Hit File, Motif PWM Logos Folder and Gene Universe provide `fimo_found.txt`, the folder `logos` and `universe.txt` which can be found in `iplantcollaborative/example_data/cyverseuk/hmt_testdata` under Community Data. These are the files created by the helper app HMT\_index. Press Launch.
 6. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 7. The relevant overrepresentations after multiple testing corrections can be found in the files with names starting with `Overrepresentation_`. Are any motifs overrepresented in any of the clusters? What do the different file names mean? What happens as you increase the stringency? If in doubt, consult [the documentation][hmt].
 
@@ -169,10 +169,10 @@ For details, consult [the documentation][memelab].
 To perform a MEME-LaB analysis:
 
 1. Locate the MEME-LaB app (under Enrichment Analysis / Transcription Factor Binding Sites in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Similarly to HMT, MEME-LaB operates on promoter sequences of genes in the organism we're working on. However, while HMT outsources promoter mining to its helper app HMT\_index, MEME-LaB performs it within its innards. As such, we need to provide a genome sequence and GFF3 file for the app to automatically extract promoters. You can find them in `cyverseuk/hmt_index_testdata` under Community Data, with `genome_rm.fa` going into the Genome FASTA File field and `annot.gff3` going into the GFF3 Annotation field.
+2. Similarly to HMT, MEME-LaB operates on promoter sequences of genes in the organism we're working on. However, while HMT outsources promoter mining to its helper app HMT\_index, MEME-LaB performs it within its innards. As such, we need to provide a genome sequence and GFF3 file for the app to automatically extract promoters. You can find them in `iplantcollaborative/example_data/cyverseuk/hmt_index_testdata` under Community Data, with `genome_rm.fa` going into the Genome FASTA File field and `annot.gff3` going into the GFF3 Annotation field.
 3. Provide the MEME-formatted clusters generated by TCAP that you filtered singletons out of and re-uploaded to CyVerse in the Gene Group Input File field. Press Launch.
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
-5. Take a look at the results. Each cluster should have the same number of overrepresented motifs reported, with each motif featuring a number of statistics on its incidence rate. How do these results compare to what was found by HMT? You can find the PWM logos for the HMT motifs at `cyverseuk/hmt_testdata/logos` under Community Data.
+5. Take a look at the results. Each cluster should have the same number of overrepresented motifs reported, with each motif featuring a number of statistics on its incidence rate. How do these results compare to what was found by HMT? You can find the PWM logos for the HMT motifs at `iplantcollaborative/example_data/cyverseuk/hmt_testdata/logos` under Community Data.
 
 When ran with the same set of clusters as HMT (TCAP, GP2S threshold of 5), a motif very similar to the one located in cluster 2 (M2350_1.02) is also identified in cluster 2, as the second best motif. However, another motif is also identified in the cluster, with a higher occurrence rate. This demonstrates the strength of *de novo* motif mining, as the motif set used in HMT did not have information on this motif which might be a driving force behind the regulatory phenomena in this cluster. However, as a trade-off, we don't have any immediate information on what transcription factors may be binding to it. Also, the fact that MEME-LaB always has to report a fixed top number of motifs leads to some of the motifs being reported being possibly uninformative. As such, always check the incidence rate statistics provided when evaluating the motifs.
 
@@ -188,7 +188,7 @@ To filter the data to include differentially expressed transcription factors:
 
 1. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
 2. Under Input, provide the differentially expressed gene expression data (the renamed `FilteredOutput.csv` file created in the GP2S section of the tutorial) into the Expression CSV File field.
-3. Provide a list of Arabidopsis transcription factors (sourced from [Pruneda-Paz et al.][kay], `cyverseuk/expression_tutorial/tf_list.txt` under Community Data) in the Filter Gene List field. Press Launch.
+3. Provide a list of Arabidopsis transcription factors (sourced from [Pruneda-Paz et al.][kay], `iplantcollaborative/example_data/cyverseuk/expression_tutorial/tf_list.txt` under Community Data) in the Filter Gene List field. Press Launch.
 
 ### CSI
 

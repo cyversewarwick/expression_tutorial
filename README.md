@@ -4,11 +4,19 @@
 
 This page will offer a step by step guide of a basic analysis of time course expression data using tools available within CyVerse, plus two brief sessions in Cytoscape. Similar steps can be taken to obtain a solid analysis skeleton for any time course expression data, with the obtained results serving as a good foundation for further data mining to draw appropriate biological conclusions.
 
+## The Apps
+
+All of the tools that we'll be using during the tutorial are housed within user-friendly apps. We'll just have to provide some data and parameters into their graphical user interfaces.
+
+![Apps][screens/1.png]
+
+To locate the apps, open the Apps window by pressing the Apps button **(A)**. You can then find any app requested by the tutorial by clicking the Search Apps field **(B)** and writing the specified name. Press enter, and click the app that's found **(C)**.
+
 ## The Data
 
 For the purpose of the tutorial, we will use a small expression input file to make the individual analyses complete in a timely manner. The data at hand will be 250 randomly chosen genes from a 24 time point microarray time course documenting Arabidopsis response to *Botrytis cinerea* infection, along with a control experiment. The complete experiment analysis, along with the drawn conclusions, can be found in [Windram et al., 2012][windram2012]. Reading that article can serve as an example on how to identify and perform follow-up analyses building on the core of the workflow.
 
-The expression data can be found at `iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data.
+The expression data can be found at `iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data. To access this, open up a Data window by pressing the Data button **(A)**. Then press Community Data **(B)** and navigate the folder hierarchy until you get to the right folder. Disclaimer - CyVerse sorts its folder names in a slightly unusual fashion, with folders starting with lower case letters only showing up after the folders that start with higher case letters.
 
 The discussed workflow can also be performed for RNA-Seq data, but due to assumptions made by the algorithms the data has to be log-transformed to make its distribution closer to normal. This option is offered by the expression filter app mentioned later in the tutorial.
 
@@ -74,12 +82,12 @@ While the differential expression analysis made active use of the control inform
 To filter out the control data:
 
 1. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the differentially expressed gene expression data (the renamed `FilteredOutput.csv` file created in the GP2S section of the tutorial) into the Expression CSV File field.
+2. Under Input, provide the differentially expressed gene expression data (the renamed `FilteredOutput.csv` file created in the GP2S section of the tutorial; it is important you rename this file prior to the analysis or the app will return no results) into the Expression CSV File field.
 3. Type in `Control` under Remove Condition. Press Launch.
 
 ### BHC
 
-BHC is a standard hierarchical clustering algorithm which starts off with all the genes in their own separate clusters and iteratively merges the most fitting pair of clusters until all genes are in one huge cluster. It then automatically determines where to cut off this cluster hierarchy, producing a set of gene groups best differentiating the different regulatory events taking place.
+BHC is a Bayesian hierarchical clustering algorithm which starts off with all the genes in their own separate clusters and iteratively merges the most fitting pair of clusters until all genes are in one huge cluster. It then automatically determines where to cut off this cluster hierarchy, producing a set of gene groups best differentiating the different regulatory events taking place.
 
 For details, consult [the documentation][bhc].
 
@@ -91,7 +99,7 @@ To perform a BHC analysis:
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 5. Take a look at the clustering heatmap (`heatmap.png`), which shows the established clustering hierarchy and captures the determined cutoff. If the lines of the dendrogram are solid, the clustering steps were deemed acceptable and stayed in the final output. If the lines are dashed, the algorithm determined that the clustering step is detrimental to the quality of the output and left it out. A number of the clusters are singletons (just one gene in them). Any idea why?
 
-In this step, we performed basic co-expression clustering using a hierarchical clustering approach. We obtained a list of clusters with genes in them. A lot of the clusters just had a single gene in them, which stems from the fact we're working on a small data sample and some of the 250 randomly selected profile didn't match other expression profiles enough to become clustered together.
+In this step, we performed basic co-expression clustering using a hierarchical clustering approach. We obtained a list of clusters with genes in them. A lot of the clusters just had a single gene in them, which stems from the fact we're working on a small data sample and some of the 250 randomly selected profiles didn't match other expression profiles enough to become clustered together.
 
 ### TCAP
 

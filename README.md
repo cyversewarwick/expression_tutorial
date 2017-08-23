@@ -8,7 +8,7 @@ This page will offer a step by step guide of a basic analysis of time course exp
 
 All of the tools that we'll be using during the tutorial are housed within user-friendly apps. We'll just have to provide some data and parameters into their graphical user interfaces.
 
-![Apps][screens/1.png]
+![Apps][1.png]
 
 To locate the apps, open the Apps window by pressing the Apps button **(A)**. You can then find any app requested by the tutorial by clicking the Search Apps field **(B)** and writing the specified name. Press enter, and click the app that's found **(C)**.
 

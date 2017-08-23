@@ -14,7 +14,7 @@ To locate the apps, open the Apps window by pressing the Apps button **(A)**. Yo
 
 ![Analyses](screens/2.png)
 
-Once an analysis is submitted, you'll be notified when it finishes by the bell in the upper right corner of the screen **(A)**. You can check on its status by either pressing the resulting notification or going into Analyses **(B)**. From there, you can click on the analysis name **(C)** to be taken directly to the output folder. Alternately, you can find the output folder by opening a Data window, going into the folder with the same name as your username, and then going into analyses and finding the folder with the name matching the name you gave the analysis when launching it.
+Once an analysis is submitted, you'll be notified when it finishes by the bell in the upper right corner of the screen **(A)**. You can check on its status by either pressing the resulting notification or going into Analyses **(B)**. From there, you can click on the analysis name **(C)** to be taken directly to the output folder. Alternately, you can find the output folder by opening a Data window, going into the folder with the same name as your username, and then going into analyses and finding the folder with the name matching the name you gave the analysis when launching it. The default result folder name features the app name along with the date of the analysis for ease of locating particular run results of interest.
 
 ## The Data
 
@@ -22,7 +22,7 @@ For the purpose of the tutorial, we will use a small expression input file to ma
 
 ![Data](screens/3.png)
 
-The expression data can be found at `iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data. To access this, open up a Data window by pressing the Data button **(A)**. Then press Community Data **(B)** and navigate the folder hierarchy until you get to the right folder. Disclaimer - CyVerse sorts its folder names in a slightly unusual fashion, with folders starting with lower case letters only showing up after the folders that start with higher case letters. You can drag files directly out of a Data window into an app.
+The expression data can be found at `iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data. To access this, open up a Data window by pressing the Data button **(A)**. Then press Community Data **(B)** and navigate the folder hierarchy until you get to the right folder. Disclaimer - CyVerse sorts its folder names in a slightly unusual fashion, with folders starting with lower case letters only showing up after the folders that start with higher case letters. You can drag files directly out of a Data window into an app, and this is greatly recommended as it's far easier than the alternative.
 
 The discussed workflow can also be performed for RNA-Seq data, but due to assumptions made by the algorithms the data has to be log-transformed to make its distribution closer to normal. This option is offered by the expression filter app mentioned later in the tutorial.
 
@@ -159,7 +159,7 @@ To perform a BiNGO analysis:
 
 ![BiNGO](screens/9.png)
 
-1. If you don't have it already, set up Cytoscape on your machine. Go to http://www.cytoscape.org/download.php and download the recommended installer. Then us it to install Cytoscape.
+1. If you don't have it already, set up Cytoscape on your machine. Go to http://www.cytoscape.org/download.php and download the recommended installer. Then use it to install Cytoscape.
 2. Open Cytoscape.
 3. Set up BiNGO. Go to http://apps.cytoscape.org/apps/bingo and press the Install button. This will automatically set up the app within your Cytoscape environment.
 4. Open the Apps dropdown in the Cytoscape menu bar and open BiNGO.

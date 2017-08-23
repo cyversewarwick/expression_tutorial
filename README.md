@@ -12,11 +12,17 @@ All of the tools that we'll be using during the tutorial are housed within user-
 
 To locate the apps, open the Apps window by pressing the Apps button **(A)**. You can then find any app requested by the tutorial by clicking the Search Apps field **(B)** and writing the specified name. Press enter, and click the app that's found **(C)**.
 
+![Analyses](screens/2.png)
+
+Once an analysis is submitted, you'll be notified when it finishes by the bell in the upper right corner of the screen **(A)**. You can check on its status by either pressing the resulting notification or going into Analyses **(B)**. From there, you can click on the analysis name **(C)** to be taken directly to the output folder. Alternately, you can find the output folder by opening a Data window, going into the folder with the same name as your username, and then going into analyses and finding the folder with the name matching the name you gave the analysis when launching it.
+
 ## The Data
 
 For the purpose of the tutorial, we will use a small expression input file to make the individual analyses complete in a timely manner. The data at hand will be 250 randomly chosen genes from a 24 time point microarray time course documenting Arabidopsis response to *Botrytis cinerea* infection, along with a control experiment. The complete experiment analysis, along with the drawn conclusions, can be found in [Windram et al., 2012][windram2012]. Reading that article can serve as an example on how to identify and perform follow-up analyses building on the core of the workflow.
 
-The expression data can be found at `iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data. To access this, open up a Data window by pressing the Data button **(A)**. Then press Community Data **(B)** and navigate the folder hierarchy until you get to the right folder. Disclaimer - CyVerse sorts its folder names in a slightly unusual fashion, with folders starting with lower case letters only showing up after the folders that start with higher case letters.
+![Data](screens/3.png)
+
+The expression data can be found at `iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data. To access this, open up a Data window by pressing the Data button **(A)**. Then press Community Data **(B)** and navigate the folder hierarchy until you get to the right folder. Disclaimer - CyVerse sorts its folder names in a slightly unusual fashion, with folders starting with lower case letters only showing up after the folders that start with higher case letters. You can drag files directly out of a Data window into an app.
 
 The discussed workflow can also be performed for RNA-Seq data, but due to assumptions made by the algorithms the data has to be log-transformed to make its distribution closer to normal. This option is offered by the expression filter app mentioned later in the tutorial.
 
@@ -34,16 +40,18 @@ For details, consult [the documentation][gp2s].
 
 To perform a GP2S analysis:
 
-1. Locate and open the GP2S app (under Time Series Expression Data / Differential Expression in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under General Input, provide the initial expression data (`iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
-3. Feel free to leave the other parameters as default. Press Launch.
+![GP2S](screens/4.png)
+
+1. Locate and open the GP2S app using the search bar at the top of the apps window.
+2. Under General Input **(A)**, provide the initial expression data (`iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field **(B)**.
+3. Feel free to leave the other parameters as default. Press Launch **(C)**.
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 5. Go to the plots folder and take a look at the plots. The name of each individual plot file is the analysed gene, while the title line of the plot contains information on the Bayes Factor score assigned to it based on the models. The blue model is the one fit to all the data at once, while the red and green are two individual fits for each condition separately. The higher the score, the more confident the algorithm is the gene is differentially expressed. Around what score value do you start seeing visually discernible differential expression?
 6. Select a score cutoff for differential expression. The documentation recommends a value between 3 and 10. Combine this suggestion with the conclusions you drew from looking at the plots and pick a value. The rest of the analysis has been tested with a cutoff of 5.
-7. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
-8. Under Input, provide the initial expression data (`iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
-9. Under Input, provide the `scores.txt` file produced by GP2S in the GP2S Scores field.
-10. Under Input, provide the score cutoff you settled on in the Score Threshold field. The default value of 5 is there just as a guideline. Press Launch.
+7. Locate the Expression Filter app using the search bar at the top of the apps window.
+8. Under Input **(D)**, provide the initial expression data (`iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field **(E)**.
+9. Under Input, provide the `scores.txt` file produced by GP2S in the GP2S Scores field **(F)**.
+10. Under Input, provide the score cutoff you settled on in the Score Threshold field **(G)**. The default value of 5 is there just as a guideline. Press Launch **(H)**.
 11. Once the analysis completes, go into the results folder and rename the created `FilteredOutput.csv` to a name of your choosing. This is needed so that further filtering of the data can be performed in later steps.
 
 Once the expression filter analysis completes, you will have an expression file with just the differentially expressed genes in it. This is the file that will be used on input for analyses in subsequent stages of the workflow.
@@ -58,11 +66,13 @@ For details, consult [the documentation][gradienttool].
 
 To perform a gradient tool analysis:
 
-1. Filter down the dataset to just the treated data. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the initial expression data (`iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field.
-3. Type in `Control` under Remove Condition. Press Launch.
-4. Locate and open the Gradient Tool app (under Time Series Expression Data / Differential expression in the hierarchy, or just locate it using the search bar at the top of the apps window).
-5. Under Input, provide the `FilteredOutput.csv` file created by the Expression Filtered app in step 1 under the Expression File field. Press Launch.
+![Gradient](screens/5.png)
+
+1. Filter down the dataset to just the treated data. Locate the Expression Filter app using the search bar at the top of the apps window.
+2. Under Input **(A)**, provide the initial expression data (`iplantcollaborative/example_data/cyverseuk/expression_tutorial/data.csv` under Community Data) into the Expression CSV File field **(B)**.
+3. Type in `Control` under Remove Condition **(C)**. Press Launch **(D)**.
+4. Locate and open the Gradient Tool app using the search bar at the top of the apps window.
+5. Under Input **(E)**, provide the `FilteredOutput.csv` file created by the Expression Filtered app in step 1 under the Expression File field **(F)**. Press Launch **(G)**.
 6. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 7. Open `out.pdf` and take a look at the models fit and the obtained regulatory phenomenon timing trends. You may have to scroll deeper down in the file, as the plots are sorted on how dynamic the gradient is. Do you see the information loss, in comparison to GP2S? Compare AT1G68850's performance in GP2S and the gradient tool.
 8. Occasionally, using the gradient tool may still be desired for datasets with a control and a treated time course. In that case, it is preferable to compute the mean for each of the conditions (single value per time point) and then obtain a difference between the two at each time point. The gradient tool can then be used to analyse the difference profile for trends. This is not part of the tutorial, but should be kept in mind for potential future application if other methods prove unsatisfactory
@@ -81,9 +91,11 @@ While the differential expression analysis made active use of the control inform
 
 To filter out the control data:
 
-1. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the differentially expressed gene expression data (the renamed `FilteredOutput.csv` file created in the GP2S section of the tutorial; it is important you rename this file prior to the analysis or the app will return no results) into the Expression CSV File field.
-3. Type in `Control` under Remove Condition. Press Launch.
+![Preprocessing](screens/6.png)
+
+1. Locate the Expression Filter app using the search bar at the top of the apps window.
+2. Under Input **(A)**, provide the differentially expressed gene expression data (the renamed `FilteredOutput.csv` file created in the GP2S section of the tutorial; it is important you rename this file prior to the analysis or the app will return no results) into the Expression CSV File field **(B)**.
+3. Type in `Control` under Remove Condition **(C)**. Press Launch **(D)**.
 
 ### BHC
 
@@ -93,9 +105,11 @@ For details, consult [the documentation][bhc].
 
 To perform a BHC analysis:
 
-1. Locate the BHC app (under Time Series Expression Data / Clustering/Biclustering in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the treated-only differentially expressed gene expression data (`FilteredOutput.csv` created in the Data Preprocessing subsection) into the Expression CSV field.
-3. Select "Squared Exponential Covariance (Time Course)" from the Run Mode dropdown. Press Launch.
+![BHC](screens/7.png)
+
+1. Locate the BHC app using the search bar at the top of the apps window.
+2. Under Input **(A)**, provide the treated-only differentially expressed gene expression data (`FilteredOutput.csv` created in the Data Preprocessing subsection) into the Expression CSV field **(B)**.
+3. Select "Squared Exponential Covariance (Time Course)" from the Run Mode dropdown **(C)**. Press Launch **(D)**.
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 5. Take a look at the clustering heatmap (`heatmap.png`), which shows the established clustering hierarchy and captures the determined cutoff. If the lines of the dendrogram are solid, the clustering steps were deemed acceptable and stayed in the final output. If the lines are dashed, the algorithm determined that the clustering step is detrimental to the quality of the output and left it out. A number of the clusters are singletons (just one gene in them). Any idea why?
 
@@ -109,9 +123,11 @@ For details, consult [the documentation][tcap].
 
 To perform a TCAP analysis:
 
-1. Locate the TCAP app (under Time Series Expression Data / Clustering/Biclustering in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the treated-only differentially expressed gene expression data (`FilteredOutput.csv` created in the Data Preprocessing subsection) into the Expression CSV File field.
-3. Feel free to leave the other parameters as default. Press Launch.
+![TCAP](screens/8.png)
+
+1. Locate the TCAP app using the search bar at the top of the apps window.
+2. Under Input **(A)**, provide the treated-only differentially expressed gene expression data (`FilteredOutput.csv` created in the Data Preprocessing subsection) into the Expression CSV File field **(B)**.
+3. Feel free to leave the other parameters as default. Press Launch **(C)**.
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 5. Take a look at the cluster plots in the plots folder. Do you see any regulatory interactions more complex than basic co-expression being captured by the modules? Do singleton clusters still occur? How does their rate compare to those produced by BHC? Any ideas for why this might be happening?
 
@@ -141,12 +157,14 @@ BiNGO is a Cytoscape plug-in that allows for the analysis of the overrepresentat
 
 To perform a BiNGO analysis:
 
-1. Set up Cytoscape on your machine. Go to http://www.cytoscape.org/download.php and download the recommended installer. Then install Cytoscape.
+![BiNGO](screens/9.png)
+
+1. If you don't have it already, set up Cytoscape on your machine. Go to http://www.cytoscape.org/download.php and download the recommended installer. Then us it to install Cytoscape.
 2. Open Cytoscape.
 3. Set up BiNGO. Go to http://apps.cytoscape.org/apps/bingo and press the Install button. This will automatically set up the app within your Cytoscape environment.
 4. Open the Apps dropdown in the Cytoscape menu bar and open BiNGO.
-5. Prepare BiNGO for analysing your clusters. For Cluster Name, type in batch. Check Paste Genes from Text, as that's what we'll do shortly. Check No Visualisation instead of Visualisation. Select the ontology file to be GO\_Full. Select the organism/annotation to *Arabidopsis thaliana*.
-6. Load in your TCAP clusters. TCAP, and all the other clustering apps on CyVerse UK, automatically produce a BiNGO-friendly form of their clusters. Locate the TCAP output you downloaded to your computer earlier, open up the functional\_analysis\_inputs folder and open bingo.txt in a text editor of some sort. Copy its contents and paste them into the field underneath the checked Paste Genes from Text box in BiNGO. Then press backspace, as BiNGO sometimes randomly hangs if the last line of input is empty. Press Start BiNGO.
+5. Prepare BiNGO for analysing your clusters. For Cluster Name **(A)**, type in batch. Check Paste Genes from Text **(B)**, as that's what we'll do shortly. Check No Visualisation **(C)** instead of Visualisation. Select the ontology file to be GO\_Full **(D)**. Select the organism/annotation to *Arabidopsis thaliana* **(E)**.
+6. Load in your TCAP clusters. TCAP, and all the other clustering apps on CyVerse UK, automatically produce a BiNGO-friendly form of their clusters. Locate the TCAP output you downloaded to your computer earlier (and removed singleton clusters from), open up the `functional_analysis_inputs` folder and open `bingo.txt` in a text editor of some sort. Copy its contents and paste them into the field underneath the checked Paste Genes from Text box **(F)** in BiNGO. Then press backspace, as BiNGO sometimes randomly hangs if the last line of input is empty. Press Start BiNGO **(G)**.
 7. Once the analysis completes, take a look at the identified GO terms for your clusters. Does each cluster get to have GO terms? What sort of GO terms are identified? What happens with the singleton clusters?
 
 As with the clustering, the results of the GO term analysis are warped because the dataset we are analysing is but a small random sample of genes instead of the whole phenomenon. When performing this analysis with a GP2S score threshold of five, one of the clusters has a "response to fungus" GO term, which is expected as the stimulus we are exposing Arabidopsis to is indeed a fungus. If you're interested in finding out what the overrepresented functionality is in the full dataset, refer to [Windram et al., 2012][windram2012].
@@ -159,10 +177,12 @@ For details, consult [the documentation][hmt].
 
 To perform a HMT analysis:
 
-1. Locate the HMT app (under Enrichment Analysis / Transcription Factor Binding Sites in the hierarchy, or just locate it using the search bar at the top of the apps window).
+![HMT](screens/10.png)
+
+1. Locate the HMT app using the search bar at the top of the apps window.
 2. HMT typically requires a preliminary run of your motifs through its helper app HMT\_index, but this takes some time to process. Due to temporal constraints of the tutorial, this has been precomputed and made available for you. If you wish to take a look at the inputs for HMT\_ index or re-run it yourself at a later time, you can find the used inputs in `iplantcollaborative/example_data/cyverseuk/hmt_index_testdata` under Community Data. All the parameters in the HMT\_index were left as defaults.
-3. Under Input, provide the MEME-formatted clusters generated by TCAP that you filtered singletons out of and re-uploaded to CyVerse in the Gene Group Input File field.
-4. For the Motif Hit File, Motif PWM Logos Folder and Gene Universe provide `fimo_found.txt`, the folder `logos` and `universe.txt` which can be found in `iplantcollaborative/example_data/cyverseuk/hmt_testdata` under Community Data. These are the files created by the helper app HMT\_index. Press Launch.
+3. Under Input **(A)**, provide the MEME-formatted clusters generated by TCAP that you filtered singletons out of and re-uploaded to CyVerse in the Gene Group Input File field **(B)**.
+4. For the Motif Hit File **(C)**, Motif PWM Logos Folder **(D)** and Gene Universe **(E)** provide `fimo_found.txt`, the folder `logos` and `universe.txt` which can be found in `iplantcollaborative/example_data/cyverseuk/hmt_testdata` under Community Data. These are the files created by the helper app HMT\_index. Press Launch **(F)**.
 6. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 7. The relevant overrepresentations after multiple testing corrections can be found in the files with names starting with `Overrepresentation_`. Are any motifs overrepresented in any of the clusters? What do the different file names mean? What happens as you increase the stringency? If in doubt, consult [the documentation][hmt].
 
@@ -176,9 +196,11 @@ For details, consult [the documentation][memelab].
 
 To perform a MEME-LaB analysis:
 
-1. Locate the MEME-LaB app (under Enrichment Analysis / Transcription Factor Binding Sites in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Similarly to HMT, MEME-LaB operates on promoter sequences of genes in the organism we're working on. However, while HMT outsources promoter mining to its helper app HMT\_index, MEME-LaB performs it within its innards. As such, we need to provide a genome sequence and GFF3 file for the app to automatically extract promoters. You can find them in `iplantcollaborative/example_data/cyverseuk/hmt_index_testdata` under Community Data, with `genome_rm.fa` going into the Genome FASTA File field and `annot.gff3` going into the GFF3 Annotation field.
-3. Provide the MEME-formatted clusters generated by TCAP that you filtered singletons out of and re-uploaded to CyVerse in the Gene Group Input File field. Press Launch.
+![MEME-LaB](screens/11.png)
+
+1. Locate the MEME-LaB app using the search bar at the top of the apps window.
+2. Similarly to HMT, MEME-LaB operates on promoter sequences of genes in the organism we're working on. However, while HMT outsources promoter mining to its helper app HMT\_index, MEME-LaB performs it within its innards. As such, we need to provide a genome sequence and GFF3 file for the app to automatically extract promoters. You can find them in `iplantcollaborative/example_data/cyverseuk/hmt_index_testdata` under Community Data, with `genome_rm.fa` going into the Genome FASTA File field **(A)** and `annot.gff3` going into the GFF3 Annotation field **(B)**.
+3. Provide the MEME-formatted clusters generated by TCAP that you filtered singletons out of and re-uploaded to CyVerse in the Gene Group Input File field **(C)**. Press Launch **(D)**.
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 5. Take a look at the results. Each cluster should have the same number of overrepresented motifs reported, with each motif featuring a number of statistics on its incidence rate. How do these results compare to what was found by HMT? You can find the PWM logos for the HMT motifs at `iplantcollaborative/example_data/cyverseuk/hmt_testdata/logos` under Community Data.
 
@@ -194,9 +216,11 @@ The network inference algorithm expects expression data for differentially expre
 
 To filter the data to include differentially expressed transcription factors:
 
-1. Locate the Expression Filter app (under Time Series Expression Data / Utility in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the differentially expressed gene expression data (the renamed `FilteredOutput.csv` file created in the GP2S section of the tutorial) into the Expression CSV File field.
-3. Provide a list of Arabidopsis transcription factors (sourced from [Pruneda-Paz et al.][kay], `iplantcollaborative/example_data/cyverseuk/expression_tutorial/tf_list.txt` under Community Data) in the Filter Gene List field. Press Launch.
+![Filtering](screens/12.png)
+
+1. Locate the Expression Filter app using the search bar at the top of the apps window.
+2. Under Input **(A)**, provide the differentially expressed gene expression data (the renamed `FilteredOutput.csv` file created in the GP2S section of the tutorial) into the Expression CSV File field **(B)**.
+3. Provide a list of Arabidopsis transcription factors (sourced from [Pruneda-Paz et al.][kay], `iplantcollaborative/example_data/cyverseuk/expression_tutorial/tf_list.txt` under Community Data) in the Filter Gene List field **(C)**. Press Launch **(D)**.
 
 ### CSI
 
@@ -206,9 +230,11 @@ For details, consult [the documentation][csi].
 
 To run CSI and analyse its results:
 
-1. Locate the CSI app (under Time Series Expression Data / Network Inference in the hierarchy, or just locate it using the search bar at the top of the apps window).
-2. Under Input, provide the differentially expressed transcription factor data we filtered out in the previous step (`FilteredOutput.csv`) into the Gene Expression CSV field.
-3. Leave all the parameters as defaults. Press Launch.
+![CSI](screens/13.png)
+
+1. Locate the CSI app using the search bar at the top of the apps window.
+2. Under Input **(A)**, provide the differentially expressed transcription factor data we filtered out in the previous step (`FilteredOutput.csv`) into the Gene Expression CSV field **(B)**.
+3. Leave all the parameters as defaults. Press Launch **(C)**.
 4. Once the analysis completes, download `FullOutput.tar` from the results folder to your machine and extract it.
 5. Navigate to the `html` folder and open `csi.html`. This will open a webapp to experience the resulting network model in.
 6. The main controls in the webapp are the choice between MAP (best model for each target gene) and marginal (sum across all the models for a target gene) network models, which can be toggled in the network dropdown, and the Minimum Weight parameter box (the higher the value, the more rigorous the edge selection). Experiment with both of those options. What changes in the model when you alter those selections?
